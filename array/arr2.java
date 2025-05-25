@@ -7,9 +7,16 @@ public class arr2 {
 
 
         int secondlargestElement = getsecondLargest(arr);
+        int secondSmallestElement = getsecondSmallest(arr);
         System.out.println(secondlargestElement);
+        System.out.println(secondSmallestElement);
 
     }
+//Sabse pehle, largest aur secondLargest ko array ke pehle element se initialize karo.
+//Array ke dusre element se lekar end tak loop chalao.
+//Agar current element largest se bada hai, toh secondLargest ko largest bana do aur largest ko current element bana do.
+//Agar current element largest se chhota hai aur secondLargest se bada hai, toh secondLargest ko current element bana do.
+//Loop ke baad, secondLargest return karo.
 
     public static int getsecondLargest(int[] arr) {
         int largest = arr[0];
@@ -25,5 +32,23 @@ public class arr2 {
             }
         }
         return secondLargest;
+    }
+
+    public static int getsecondSmallest(int[] arr) {
+
+        int smallest = arr[0];
+        int secondsmallest = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < smallest) {
+                secondsmallest = smallest;
+                smallest = arr[i];
+            }
+            if (arr[i] > smallest && arr[i] < secondsmallest) {
+                secondsmallest = arr[i];
+            }
+        }
+        return secondsmallest;
+
     }
 }
