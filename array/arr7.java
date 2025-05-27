@@ -60,3 +60,11 @@ public class arr7 {
         return unionArray;
     }
 }
+//Explanation (Hindi):
+//Do pointers (p1 aur p2) initialize kiye gaye hain jo arr1 aur arr2 ke starting index par hain.
+//Jab tak dono arrays me elements available hain, unhe compare karte hain.
+//Agar arr1[p1] chhota hai, to us element ko union list me add karte hain (agar pehle se maujood na ho) aur p1 ko increment karte hain.
+//Agar arr2[p2] chhota hai, to us element ko union list me add karte hain (duplicate check ke saath) aur p2 ko increment karte hain.
+//Agar dono elements equal hain, to ek hi element add kar dete hain aur dono pointers increment kar dete hain.
+//Loop ke baad, agar kisi ek array me bache hue elements hon to unko bhi union list me duplicate check karke add karte hain.
+//Is tarah, dono sorted arrays ka union mil jata hai bina duplicates ke.
