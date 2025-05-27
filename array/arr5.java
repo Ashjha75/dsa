@@ -15,6 +15,9 @@ public class arr5 {
 
     public static void moveZeroes(int[] nums) {
         int j = -1;
+        if (nums == null || nums.length == 0) {
+            return;
+        }
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] == 0) {
                 j = i;
