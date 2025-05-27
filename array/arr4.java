@@ -22,6 +22,7 @@ public class arr4 {
 
     public static void getRotatedArray(int[] arr, int k) {
         int n = arr.length;
+
         k = k % n;
         // Reverse first part: from index 0 to n-k-1
         reverse(arr, 0, n - k - 1);
