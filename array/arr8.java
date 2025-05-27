@@ -1,7 +1,6 @@
 package array;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class arr8 {
     public static void main(String[] args) {
@@ -23,15 +22,17 @@ public class arr8 {
         return -1; // Should not reach here if input is valid
     }
 
-//    using sum
-public int missingNumber2(int[] nums) {
-    int N =nums.length;
-    int totalSum=N*(N+1)/2;
-    int sum=0;
-    for(int i=0;i<N;i++){
-        totalSum-=nums[i];
+    //    using sum
+    public int missingNumber2(int[] nums) {
+        int N = nums.length;
+        int totalSum = N * (N + 1) / 2;
+        int sum = 0;
+        for (int i = 0; i < N; i++) {
+            totalSum -= nums[i];
+        }
+        return (totalSum);
     }
-    return (totalSum);
-}
+
+//3rd solution is Xor which i have not used to keep it simple will leran next time
 
 }
