@@ -26,7 +26,7 @@ private static ArrayList<Integer> makeIntersectionOfArray(int[] arr1, int[] arr2
     while (index1 < arr1.length && index2 < arr2.length) {
         if (arr1[index1] < arr2[index2]) {
             index1++;
-        } else if (arr1[index1] > arr2[index2]) {
+        } else if (arr2[index2] < arr1[index1]) {
             index2++;
         } else {
             arrIntersection.add(arr1[index1]);
