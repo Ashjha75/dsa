@@ -9,11 +9,33 @@ public class arr7 {
         int[] arr2 = {2, 3, 4, 4, 5, 11, 12};
 
         // dono sorted array ka union banane ke liye function call
-        ArrayList<Integer> arrUnion = makeUnionOfArray(arr1, arr2);
-        for (int num : arrUnion) {
+//        ArrayList<Integer> arrUnion = makeUnionOfArray(arr1, arr2);
+//        for (int num : arrUnion) {
+//            System.out.println(num);
+//        }
+        ArrayList<Integer> arrIntersection = makeIntersectionOfArray(arr1, arr2);
+        for (int num : arrIntersection) {
             System.out.println(num);
         }
     }
+
+private static ArrayList<Integer> makeIntersectionOfArray(int[] arr1, int[] arr2) {
+    ArrayList<Integer> arrIntersection = new ArrayList<>();
+    int index1 = 0;
+    int index2 = 0;
+    while (index1 < arr1.length && index2 < arr2.length) {
+        if (arr1[index1] < arr2[index2]) {
+            index1++;
+        } else if (arr1[index1] > arr2[index2]) {
+            index2++;
+        } else {
+            arrIntersection.add(arr1[index1]);
+            index1++;
+            index2++;
+        }
+    }
+    return arrIntersection;
+}
 
     // makeUnionOfArray function do pointer technique ka use karta hai
     private static ArrayList<Integer> makeUnionOfArray(int[] arr1, int[] arr2) {
