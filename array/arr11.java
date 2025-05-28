@@ -19,7 +19,18 @@ public class arr11 {
         int maxLength = 0;
         int currentSum = arr[0];
         while (right < arr.length) {
-            currentSum += arr[right];
+            if(right<arr.length) {
+                currentSum += arr[right];
+            }
+            if (currentSum > sum) {
+                currentSum -= arr[left];
+                left++;
+            }
+            if(currentSum == sum)
+            maxLength = Math.max(maxLength, right - left + 1);
+
+
+            right++;
         }
         return currentSum;
     }
