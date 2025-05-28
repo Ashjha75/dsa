@@ -5,7 +5,7 @@ import java.util.HashMap;
 //Find the number that appears once, and the other numbers twice
 public class arr10 {
     public static void main(String[] args) {
-        int[] arr = {4,1,2,1,2};
+        int[] arr = {4, 1, 2, 1, 2};
 
     }
 

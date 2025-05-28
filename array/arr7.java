@@ -19,23 +19,23 @@ public class arr7 {
         }
     }
 
-private static ArrayList<Integer> makeIntersectionOfArray(int[] arr1, int[] arr2) {
-    ArrayList<Integer> arrIntersection = new ArrayList<>();
-    int index1 = 0;
-    int index2 = 0;
-    while (index1 < arr1.length && index2 < arr2.length) {
-        if (arr1[index1] < arr2[index2]) {
-            index1++;
-        } else if (arr2[index2] < arr1[index1]) {
-            index2++;
-        } else {
-            arrIntersection.add(arr1[index1]);
-            index1++;
-            index2++;
+    private static ArrayList<Integer> makeIntersectionOfArray(int[] arr1, int[] arr2) {
+        ArrayList<Integer> arrIntersection = new ArrayList<>();
+        int index1 = 0;
+        int index2 = 0;
+        while (index1 < arr1.length && index2 < arr2.length) {
+            if (arr1[index1] < arr2[index2]) {
+                index1++;
+            } else if (arr2[index2] < arr1[index1]) {
+                index2++;
+            } else {
+                arrIntersection.add(arr1[index1]);
+                index1++;
+                index2++;
+            }
         }
+        return arrIntersection;
     }
-    return arrIntersection;
-}
 
     // makeUnionOfArray function do pointer technique ka use karta hai
     private static ArrayList<Integer> makeUnionOfArray(int[] arr1, int[] arr2) {
