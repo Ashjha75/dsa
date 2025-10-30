@@ -14,6 +14,7 @@ public class Basics {
         int[] removedDuplicatesArray = removeDuplicatesFromSorted(new int[]{1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7});
         int smallestNumber = findSmallest(array);
         boolean isArraySorted = isArraySorted(array);
+        int[] reverseArray = reverseArray(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -24,7 +25,8 @@ public class Basics {
         System.out.println("- Third largest number: " + thirdLargest);
         System.out.println("- Duplicates removed from sorted array: " + Arrays.toString(removedDuplicatesArray));
         System.out.println("- Smallest number: " + smallestNumber);
-        System.out.println("- is Array sorted: " + isArraySorted);
+        System.out.println("- Is Array sorted: " + isArraySorted);
+        System.out.println("- Reversed Array: " + Arrays.toString(reverseArray));
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
@@ -248,7 +250,6 @@ public class Basics {
      */
     private static boolean isArraySorted(int[] array) {
         // Remove this line! Don't overwrite the parameter
-        // array = new int[]{1,2,3,4,0};
 
         if (array == null || array.length == 0) {
             throw new IllegalArgumentException("Array cannot be null or empty");
@@ -262,10 +263,38 @@ public class Basics {
         // Check if ALL consecutive pairs are in order
         for (int i = 1; i < array.length; i++) {
             if (array[i - 1] > array[i]) {  // If any pair is out of order
-                return false;                // Array is NOT sorted
+                return false;
             }
         }
 
-        return true;  // All pairs are in order
+        return true;
     }
+
+    /**
+     * Reverses the array in-place.
+     * @param array the array to reverse
+     * @return the same array (reversed)
+     */
+    public static int[] reverseArray(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+
+        int left = 0;
+        int right = array.length - 1;
+
+        while (left < right) {
+            // Swap elements
+            int temp = array[left];
+            array[left] = array[right];
+            array[right] = temp;
+
+            left++;
+            right--;
+        }
+
+        return array;
+    }
+
+
 }
