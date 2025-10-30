@@ -26,6 +26,9 @@ public class Basics {
 //        call removeDuplicates
         int[] removedDuplicatesArray = removeDuplicates(new int[]{1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7});
 
+//        call findSmallest
+        int smallestNumber = findSmallest(array);
+
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
 
         System.out.println("- Index of 11: " + index);
@@ -34,6 +37,7 @@ public class Basics {
         System.out.println("- Maximum number: " + maxNumber);
         System.out.println("- Second maximum number: " + secondMaxNumber);
         System.out.println("- Duplicates removed from array: " + Arrays.toString(removedDuplicatesArray));
+        System.out.println("- Smallest number: " + smallestNumber);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
 
@@ -143,6 +147,20 @@ public class Basics {
 
         // Copy only unique elements
         return Arrays.copyOf(array, index + 1);
+    }
+
+//    Smallest elemnt in given array
+    public static int findSmallest(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array must have at least two elements");
+        }
+        int smallest = array[0];
+        for(int ele : array) {
+            if (ele < smallest) {
+                smallest = ele;
+            }
+        }
+        return smallest;
     }
 
 }
