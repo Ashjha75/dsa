@@ -5,17 +5,21 @@ import java.util.Arrays;
 public class basics {
 
     public static void main(String[] args) {
-        int[] array = {9, 1, 4, 11, 6, 2, 7, 8, 9, 5};
+        int[] array = {9, 1, 4, 11, 6, 2,99, 7, 8, 9, 5};
 //        call customSearch
         int index = customSearch(array, 11);
 //        call insertion
         int[] updatedarray = insertion(array, 27, 3);
 //        call deleteItems
         int[] deletedarray = deleteItems(array, 6);
+//        call maxNumber
+        int maxNumber = findmax(array);
 
         System.out.println(index);
         System.out.println(Arrays.toString(updatedarray));
         System.out.println(Arrays.toString(deletedarray));
+        System.out.println(maxNumber);
+
     }
 
 
@@ -46,17 +50,28 @@ public class basics {
         return newArray;
     }
 
-//    deletion
-    public  static  int[] deleteItems(int[] array, int value) {
+    //    deletion
+    public static int[] deleteItems(int[] array, int value) {
 //        search
 //        delete
 //        swap
 
         for (int i = 0; i < array.length; i++) {
-            if(array[i] == value) {
+            if (array[i] == value) {
                 array[i] = array[array.length - 1];
             }
         }
         return array;
+    }
+
+    //    find max number
+    public static int findmax(int[] array) {
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
     }
 }
