@@ -22,11 +22,13 @@ public class Basics {
 
         // call findSecondMax
         int secondMaxNumber = findSecondMax(array);
+        // call thirdLargest
+        int thirdLargest = thirdLargest(array);
 
-//        call removeDuplicates
+        // call removeDuplicates
         int[] removedDuplicatesArray = removeDuplicates(new int[]{1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7});
 
-//        call findSmallest
+        // call findSmallest
         int smallestNumber = findSmallest(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -38,6 +40,7 @@ public class Basics {
         System.out.println("- Second maximum number: " + secondMaxNumber);
         System.out.println("- Duplicates removed from array: " + Arrays.toString(removedDuplicatesArray));
         System.out.println("- Smallest number: " + smallestNumber);
+        System.out.println("- 3rd Largest: " + thirdLargest);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
 
@@ -155,12 +158,36 @@ public class Basics {
             throw new IllegalArgumentException("Array must have at least two elements");
         }
         int smallest = array[0];
-        for(int ele : array) {
+        for (int ele : array) {
             if (ele < smallest) {
                 smallest = ele;
             }
         }
         return smallest;
     }
+
+
+    //    find 3rd largest element
+    public static int thirdLargest(int[] array) {
+        array= new int[]{10, 10, 9, 8};
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+        int thirdLargest = Integer.MIN_VALUE;
+
+        for (int ele : array) {
+            if (ele > largest) {
+                thirdLargest = secondLargest;
+                secondLargest = largest;
+                largest = ele;
+            } else if (ele > secondLargest && ele < largest) {
+                thirdLargest = secondLargest;
+                secondLargest = ele;
+            } else if (ele > thirdLargest && ele < secondLargest) {
+                thirdLargest = ele;
+            }
+        }
+        return thirdLargest;
+    }
+
 
 }
