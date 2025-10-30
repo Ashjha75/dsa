@@ -173,28 +173,28 @@ public class Basics {
             throw new IllegalArgumentException("Array must have at least three elements");
         }
 
-        Integer largest = null;
-        Integer secondLargest = null;
-        Integer thirdLargest = null;
+        Integer largest = Integer.MIN_VALUE;
+        Integer secondLargest = Integer.MIN_VALUE;
+        Integer thirdLargest = Integer.MIN_VALUE;
 
         for (int ele : array) {
             if (ele == largest || ele == secondLargest || ele == thirdLargest) {
                 continue; // skip duplicates
             }
 
-            if (largest == null || ele > largest) {
+            if (largest == Integer.MIN_VALUE || ele > largest) {
                 thirdLargest = secondLargest;
                 secondLargest = largest;
                 largest = ele;
-            } else if (secondLargest == null || ele > secondLargest) {
+            } else if (secondLargest == Integer.MIN_VALUE || ele > secondLargest) {
                 thirdLargest = secondLargest;
                 secondLargest = ele;
-            } else if (thirdLargest == null || ele > thirdLargest) {
+            } else if (thirdLargest == Integer.MIN_VALUE || ele > thirdLargest) {
                 thirdLargest = ele;
             }
         }
 
-        if (thirdLargest == null) {
+        if (thirdLargest == Integer.MIN_VALUE) {
             throw new IllegalStateException("Less than three distinct elements in array");
         }
 
