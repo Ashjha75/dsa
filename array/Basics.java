@@ -13,6 +13,7 @@ public class Basics {
         int thirdLargest = thirdLargest(array);
         int[] removedDuplicatesArray = removeDuplicatesFromSorted(new int[]{1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7});
         int smallestNumber = findSmallest(array);
+        boolean isArraySorted = isArraySorted(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -23,8 +24,10 @@ public class Basics {
         System.out.println("- Third largest number: " + thirdLargest);
         System.out.println("- Duplicates removed from sorted array: " + Arrays.toString(removedDuplicatesArray));
         System.out.println("- Smallest number: " + smallestNumber);
+        System.out.println("- is Array sorted: " + isArraySorted);
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
+
 
     /**
      * Searches for a value in the array and returns its index.
@@ -238,5 +241,31 @@ public class Basics {
         }
 
         return smallest;
+    }
+
+    /**
+     * Check if array is sorted in ascending order
+     */
+    private static boolean isArraySorted(int[] array) {
+        // Remove this line! Don't overwrite the parameter
+        // array = new int[]{1,2,3,4,0};
+
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+
+        // Single element is considered sorted
+        if (array.length == 1) {
+            return true;
+        }
+
+        // Check if ALL consecutive pairs are in order
+        for (int i = 1; i < array.length; i++) {
+            if (array[i - 1] > array[i]) {  // If any pair is out of order
+                return false;                // Array is NOT sorted
+            }
+        }
+
+        return true;  // All pairs are in order
     }
 }
