@@ -1,4 +1,4 @@
-package array;
+package previous.array;
 
 //simple linear search
 public class arr6 {

@@ -1,5 +1,5 @@
-// file: `array/arr7.java`
-package array;
+// file: `previous.array/arr7.java`
+package previous.array;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ public class arr7 {
         int[] arr1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int[] arr2 = {2, 3, 4, 4, 5, 11, 12};
 
-        // dono sorted array ka union banane ke liye function call
+        // dono sorted previous.array ka union banane ke liye function call
 //        ArrayList<Integer> arrUnion = makeUnionOfArray(arr1, arr2);
 //        for (int num : arrUnion) {
 //            System.out.println(num);
@@ -88,5 +88,5 @@ public class arr7 {
 //Agar arr1[p1] chhota hai, to us element ko union list me add karte hain (agar pehle se maujood na ho) aur p1 ko increment karte hain.
 //Agar arr2[p2] chhota hai, to us element ko union list me add karte hain (duplicate check ke saath) aur p2 ko increment karte hain.
 //Agar dono elements equal hain, to ek hi element add kar dete hain aur dono pointers increment kar dete hain.
-//Loop ke baad, agar kisi ek array me bache hue elements hon to unko bhi union list me duplicate check karke add karte hain.
+//Loop ke baad, agar kisi ek previous.array me bache hue elements hon to unko bhi union list me duplicate check karke add karte hain.
 //Is tarah, dono sorted arrays ka union mil jata hai bina duplicates ke.

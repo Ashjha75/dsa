@@ -1,13 +1,13 @@
-package array;
+package previous.array;
 
 /**
  * Longest Subarray with given Sum K (Positives)
  * Problem: Find the length of the longest subarray with sum equal to K
- * Input Format: N = 5, k = 10, array[] = {2,3,5,1,9}
+ * Input Format: N = 5, k = 10, previous.array[] = {2,3,5,1,9}
  * Result: 3 (subarray {2,3,5} has sum 10 and length 3)
  *
  * Approach: Using sliding window technique with two pointers
- * Time Complexity: O(N) where N is the length of the array
+ * Time Complexity: O(N) where N is the length of the previous.array
  * Space Complexity: O(1) as we're using constant extra space
  */
 public class arr11 {
@@ -21,12 +21,12 @@ public class arr11 {
 
     /**
      * Find the length of the longest subarray with sum equal to k
-     * @param arr Input array
+     * @param arr Input previous.array
      * @param k Target sum
      * @return Length of the longest subarray with sum equal to k
      */
     private static int getMaxSubarray(int[] arr, int k) {
-        int n = arr.length; // Size of the array
+        int n = arr.length; // Size of the previous.array
 
         // Initialize two pointers for the sliding window
         int left = 0, right = 0;
@@ -56,7 +56,7 @@ public class arr11 {
             // Expand window by moving the right pointer
             right++;
 
-            // Add the new element to the sum if right pointer is still within array
+            // Add the new element to the sum if right pointer is still within previous.array
             if (right < n) {
                 sum += arr[right];
             }

@@ -1,6 +1,6 @@
-package array;
+package previous.array;
 
-// move zero from array at last
+// move zero from previous.array at last
 
 public class arr5 {
     public static void main(String[] args) {

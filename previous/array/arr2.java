@@ -1,4 +1,4 @@
-package array;
+package previous.array;
 
 // find the second largest and second smallest
 public class arr2 {
@@ -12,7 +12,7 @@ public class arr2 {
         System.out.println(secondSmallestElement);
 
     }
-//Sabse pehle, largest aur secondLargest ko array ke pehle element se initialize karo.
+//Sabse pehle, largest aur secondLargest ko previous.array ke pehle element se initialize karo.
 //Array ke dusre element se lekar end tak loop chalao.
 //Agar current element largest se bada hai, toh secondLargest ko largest bana do aur largest ko current element bana do.
 //Agar current element largest se chhota hai aur secondLargest se bada hai, toh secondLargest ko current element bana do.

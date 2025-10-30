@@ -1,4 +1,4 @@
-package array;
+package previous.array;
 
 public class arr9 {
     public static void main(String[] args) {

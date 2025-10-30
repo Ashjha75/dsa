@@ -1,6 +1,6 @@
-package array;
+package previous.array;
 
-// Remove duplicate elemnts form sorted array
+// Remove duplicate elemnts form sorted previous.array
 public class arr3 {
 
     public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class arr3 {
         return firstIndex + 1;
     }
 
-    // brutforce approach if array is return than else return unique ele legth
+    // brutforce approach if previous.array is return than else return unique ele legth
 //    public static int[] getUniqueElements(int[] arr) {
 //        Set<Integer> set = new HashSet<>();
 //        for (int j : arr) {
