@@ -169,23 +169,35 @@ public class Basics {
 
     //    find 3rd largest element
     public static int thirdLargest(int[] array) {
-        array= new int[]{10, 10, 9, 8};
-        int largest = Integer.MIN_VALUE;
-        int secondLargest = Integer.MIN_VALUE;
-        int thirdLargest = Integer.MIN_VALUE;
+        if (array == null || array.length < 3) {
+            throw new IllegalArgumentException("Array must have at least three elements");
+        }
+
+        Integer largest = null;
+        Integer secondLargest = null;
+        Integer thirdLargest = null;
 
         for (int ele : array) {
-            if (ele > largest) {
+            if (ele == largest || ele == secondLargest || ele == thirdLargest) {
+                continue; // skip duplicates
+            }
+
+            if (largest == null || ele > largest) {
                 thirdLargest = secondLargest;
                 secondLargest = largest;
                 largest = ele;
-            } else if (ele > secondLargest && ele < largest) {
+            } else if (secondLargest == null || ele > secondLargest) {
                 thirdLargest = secondLargest;
                 secondLargest = ele;
-            } else if (ele > thirdLargest && ele < secondLargest) {
+            } else if (thirdLargest == null || ele > thirdLargest) {
                 thirdLargest = ele;
             }
         }
+
+        if (thirdLargest == null) {
+            throw new IllegalStateException("Less than three distinct elements in array");
+        }
+
         return thirdLargest;
     }
 
