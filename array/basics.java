@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class basics {
 
     public static void main(String[] args) {
-        int[] array = {9, 1, 4, 11, 6, 2,99, 7, 8, 9, 5};
+        int[] array = {9, 1, 4, 11, 6, 2, 99, 7, 8, 9, 5,19};
 //        call customSearch
         int index = customSearch(array, 11);
 //        call insertion
@@ -14,11 +14,14 @@ public class basics {
         int[] deletedarray = deleteItems(array, 6);
 //        call maxNumber
         int maxNumber = findmax(array);
+//        call maxNumber
+        int secondMaxNumber = findSecondMax(array);
 
         System.out.println(index);
         System.out.println(Arrays.toString(updatedarray));
         System.out.println(Arrays.toString(deletedarray));
         System.out.println(maxNumber);
+        System.out.println(secondMaxNumber);
 
     }
 
@@ -73,5 +76,19 @@ public class basics {
             }
         }
         return max;
+    }
+
+    //    find 2nd largest element inarray
+    public static int findSecondMax(int[] array) {
+        int max = array[0];
+        int secondMax = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                secondMax = max;
+                max = array[i];
+            }
+
+        }
+        return secondMax;
     }
 }
