@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package array;
 
 import java.util.Arrays;
@@ -16,138 +11,141 @@ public class Basics {
         int maxNumber = findMax(array);
         int secondMaxNumber = findSecondMax(array);
         int thirdLargest = thirdLargest(array);
-        int[] removedDuplicatesArray = removeDuplicates(new int[]{1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7});
+        int[] removedDuplicatesArray = removeDuplicatesFromSorted(new int[]{1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7});
         int smallestNumber = findSmallest(array);
+
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
         System.out.println("- After insertion: " + Arrays.toString(updatedArray));
         System.out.println("- After deletion: " + Arrays.toString(deletedArray));
         System.out.println("- Maximum number: " + maxNumber);
         System.out.println("- Second maximum number: " + secondMaxNumber);
-        System.out.println("- Duplicates removed from array: " + Arrays.toString(removedDuplicatesArray));
+        System.out.println("- Third largest number: " + thirdLargest);
+        System.out.println("- Duplicates removed from sorted array: " + Arrays.toString(removedDuplicatesArray));
         System.out.println("- Smallest number: " + smallestNumber);
-        System.out.println("- 3rd Largest: " + thirdLargest);
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
+    /**
+     * Searches for a value in the array and returns its index.
+     *
+     * @return index of the value, or -1 if not found
+     */
     public static int customSearch(int[] array, int searchValue) {
-        for(int i = 0; i < array.length; ++i) {
+        if (array == null) {
+            return -1;
+        }
+
+        for (int i = 0; i < array.length; i++) {
             if (array[i] == searchValue) {
                 return i;
             }
         }
-
         return -1;
     }
 
+    /**
+     * Inserts an element at the specified position.
+     */
     public static int[] insertElement(int[] array, int value, int position) {
-        if (position >= 0 && position <= array.length) {
-            int[] newArray = new int[array.length + 1];
-
-            for(int i = 0; i < position; ++i) {
-                newArray[i] = array[i];
-            }
-
-            newArray[position] = value;
-
-            for(int i = position; i < array.length; ++i) {
-                newArray[i + 1] = array[i];
-            }
-
-            return newArray;
-        } else {
-            throw new IllegalArgumentException("Invalid position");
+        if (array == null) {
+            throw new IllegalArgumentException("Array cannot be null");
         }
+        if (position < 0 || position > array.length) {
+            throw new IllegalArgumentException("Invalid position: " + position);
+        }
+
+        int[] newArray = new int[array.length + 1];
+
+        // Copy elements before insertion point
+        for (int i = 0; i < position; i++) {
+            newArray[i] = array[i];
+        }
+
+        // Insert new value
+        newArray[position] = value;
+
+        // Copy elements after insertion point
+        for (int i = position; i < array.length; i++) {
+            newArray[i + 1] = array[i];
+        }
+
+        return newArray;
     }
 
+    /**
+     * Deletes the first occurrence of a value from the array.
+     */
     public static int[] deleteElement(int[] array, int value) {
+        if (array == null) {
+            throw new IllegalArgumentException("Array cannot be null");
+        }
+
         int index = customSearch(array, value);
         if (index == -1) {
             System.out.println("Value not found, no deletion performed.");
             return array;
-        } else {
-            int[] newArray = new int[array.length - 1];
-            int i = 0;
-
-            for(int j = 0; i < array.length; ++i) {
-                if (i != index) {
-                    newArray[j++] = array[i];
-                }
-            }
-
-            return newArray;
         }
+
+        int[] newArray = new int[array.length - 1];
+        int j = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            if (i != index) {
+                newArray[j++] = array[i];
+            }
+        }
+
+        return newArray;
     }
 
+    /**
+     * Finds the maximum value in the array.
+     */
     public static int findMax(int[] array) {
-        int max = array[0];
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array must have at least one element");
+        }
 
-        for(int i = 1; i < array.length; ++i) {
+        int max = array[0];
+        for (int i = 1; i < array.length; i++) {
             if (array[i] > max) {
                 max = array[i];
             }
         }
-
         return max;
     }
 
+    /**
+     * Finds the second maximum distinct value in the array.
+     */
     public static int findSecondMax(int[] array) {
-        if (array.length < 2) {
-            throw new IllegalArgumentException("Array must have at least two elements");
-        } else {
-            int max = Integer.MIN_VALUE;
-            int secondMax = Integer.MIN_VALUE;
-
-            for(int num : array) {
-                if (num > max) {
-                    secondMax = max;
-                    max = num;
-                } else if (num > secondMax && num < max) {
-                    secondMax = num;
-                }
-            }
-
-            if (secondMax == Integer.MIN_VALUE) {
-                throw new IllegalStateException("No distinct second maximum found (all elements equal?)");
-            } else {
-                return secondMax;
-            }
-        }
-    }
-
-    public static int[] removeDuplicates(int[] array) {
-        if (array != null && array.length != 0) {
-            int index = 0;
-
-            for(int i = 1; i < array.length; ++i) {
-                if (array[i] != array[index]) {
-                    ++index;
-                    array[index] = array[i];
-                }
-            }
-
-            return Arrays.copyOf(array, index + 1);
-        } else {
-            return new int[0];
-        }
-    }
-
-    public static int findSmallest(int[] array) {
-        if (array != null && array.length != 0) {
-            int smallest = array[0];
-
-            for(int ele : array) {
-                if (ele < smallest) {
-                    smallest = ele;
-                }
-            }
-
-            return smallest;
-        } else {
+        if (array == null || array.length < 2) {
             throw new IllegalArgumentException("Array must have at least two elements");
         }
+
+        int max = Integer.MIN_VALUE;
+        int secondMax = Integer.MIN_VALUE;
+
+        for (int num : array) {
+            if (num > max) {
+                secondMax = max;
+                max = num;
+            } else if (num > secondMax && num != max) {  // FIXED: Changed from num < max to num != max
+                secondMax = num;
+            }
+        }
+
+        if (secondMax == Integer.MIN_VALUE) {
+            throw new IllegalStateException("No distinct second maximum found (all elements equal or less than two distinct values)");
+        }
+
+        return secondMax;
     }
 
+    /**
+     * Finds the third largest distinct value in the array.
+     */
     public static int thirdLargest(int[] array) {
         if (array == null || array.length < 3) {
             throw new IllegalArgumentException("Array must have at least three elements");
@@ -175,5 +173,70 @@ public class Basics {
         }
 
         return thirdLargest;
+    }
+
+    /**
+     * Removes consecutive duplicates from a SORTED array.
+     * NOTE: This only works correctly on sorted arrays!
+     */
+    public static int[] removeDuplicatesFromSorted(int[] array) {
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        int index = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] != array[index]) {
+                index++;
+                array[index] = array[i];
+            }
+        }
+
+        return Arrays.copyOf(array, index + 1);
+    }
+
+    /**
+     * Removes all duplicates from an unsorted array (if needed).
+     */
+    public static int[] removeDuplicatesFromUnsorted(int[] array) {
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        int[] temp = new int[array.length];
+        int index = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            boolean isDuplicate = false;
+            for (int j = 0; j < index; j++) {
+                if (array[i] == temp[j]) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                temp[index++] = array[i];
+            }
+        }
+
+        return Arrays.copyOf(temp, index);
+    }
+
+    /**
+     * Finds the smallest value in the array.
+     */
+    public static int findSmallest(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array must have at least one element");
+        }
+
+        int smallest = array[0];
+        for (int ele : array) {
+            if (ele < smallest) {
+                smallest = ele;
+            }
+        }
+
+        return smallest;
     }
 }
