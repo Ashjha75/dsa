@@ -23,6 +23,9 @@ public class Basics {
         // call findSecondMax
         int secondMaxNumber = findSecondMax(array);
 
+//        call removeDuplicates
+        int[] removedDuplicatesArray = removeDuplicates(new int[]{1, 2, 2, 3, 4, 5, 5, 5, 6, 7, 7});
+
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
 
         System.out.println("- Index of 11: " + index);
@@ -30,6 +33,7 @@ public class Basics {
         System.out.println("- After deletion: " + Arrays.toString(deletedArray));
         System.out.println("- Maximum number: " + maxNumber);
         System.out.println("- Second maximum number: " + secondMaxNumber);
+        System.out.println("- Duplicates removed from array: " + Arrays.toString(removedDuplicatesArray));
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
 
@@ -120,4 +124,25 @@ public class Basics {
 
         return secondMax;
     }
+//    {1,2,2,3,4,5,5,5,6,7,7}
+
+    //    remove duplicate from sorted array
+    public static int[] removeDuplicates(int[] array) {
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        int index = 0; // pointer to track unique position
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] != array[index]) {
+                index++;
+                array[index] = array[i];
+            }
+        }
+
+        // Copy only unique elements
+        return Arrays.copyOf(array, index + 1);
+    }
+
 }
