@@ -15,6 +15,7 @@ public class Basics {
         int smallestNumber = findSmallest(array);
         boolean isArraySorted = isArraySorted(array);
         int[] reverseArray = reverseArray(array);
+        int[] replaceWithMax = replaceWithMax(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -27,6 +28,7 @@ public class Basics {
         System.out.println("- Smallest number: " + smallestNumber);
         System.out.println("- Is Array sorted: " + isArraySorted);
         System.out.println("- Reversed Array: " + Arrays.toString(reverseArray));
+        System.out.println("- Replace with max Array: " + Arrays.toString(replaceWithMax));
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
@@ -272,6 +274,7 @@ public class Basics {
 
     /**
      * Reverses the array in-place.
+     *
      * @param array the array to reverse
      * @return the same array (reversed)
      */
@@ -294,6 +297,33 @@ public class Basics {
         }
 
         return array;
+    }
+
+    /**
+     * Replaces each element with the greatest element on its right side.
+     * The last element is replaced with 0.
+     *
+     * @param array the input array
+     * @return new array with elements replaced
+     */
+    public static int[] replaceWithMax(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+
+        int n = array.length;
+        int[] result = new int[n];
+        int max = array[n - 1];
+        result[n - 1] = 0;
+
+        for (int i = n - 2; i >= 0; i--) {
+            result[i] = max;
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+
+        return result;
     }
 
 
