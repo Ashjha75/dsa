@@ -1,6 +1,9 @@
 package array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Basics {
     public static void main(String[] args) {
@@ -16,6 +19,7 @@ public class Basics {
         boolean isArraySorted = isArraySorted(array);
         int[] reverseArray = reverseArray(array);
         int[] replaceWithMax = replaceWithMax(array);
+        int[] leadersInArray = leadersInArray(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -29,6 +33,7 @@ public class Basics {
         System.out.println("- Is Array sorted: " + isArraySorted);
         System.out.println("- Reversed Array: " + Arrays.toString(reverseArray));
         System.out.println("- Replace with max Array: " + Arrays.toString(replaceWithMax));
+        System.out.println("- Leaders in Array: " + Arrays.toString(leadersInArray));
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
@@ -326,5 +331,26 @@ public class Basics {
         return result;
     }
 
+    /**
+     * Returns all leaders in the array (elements >= all elements to their right).
+     * @throws IllegalArgumentException if array is null or empty
+     */
+    public static int[] leadersInArray(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int n = array.length;
+        List<Integer> leaders = new ArrayList<>();
+        int max = array[n - 1];
+        leaders.add(max);
+        for (int i = n - 2; i >= 0; i--) {
+            if (array[i] > max) {
+                max = array[i];
+                leaders.add(max);
+            }
+        }
+        Collections.reverse(leaders);
+        return leaders.stream().mapToInt(Integer::intValue).toArray();
+    }
 
 }
