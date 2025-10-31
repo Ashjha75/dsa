@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Basics {
     public static void main(String[] args) {
-        int[] array = new int[]{9, 1, 4, 11, 6, 2, 99, 7, 8, 9, 5, 19};
+        int[] array = new int[]{4, -1, -2, 5, 3, -6, 2, 4, -3, 2, 3, -2, 3};
         int index = customSearch(array, 11);
         int[] updatedArray = insertElement(array, 27, 3);
         int[] deletedArray = deleteElement(array, 6);
@@ -20,6 +20,7 @@ public class Basics {
         int[] reverseArray = reverseArray(array);
         int[] replaceWithMax = replaceWithMax(array);
         int[] leadersInArray = leadersInArray(array);
+        int findMaxSum = findMaxSum(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -34,6 +35,7 @@ public class Basics {
         System.out.println("- Reversed Array: " + Arrays.toString(reverseArray));
         System.out.println("- Replace with max Array: " + Arrays.toString(replaceWithMax));
         System.out.println("- Leaders in Array: " + Arrays.toString(leadersInArray));
+        System.out.println("-  Max Sum Is: " + findMaxSum);
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
@@ -333,6 +335,7 @@ public class Basics {
 
     /**
      * Returns all leaders in the array (elements >= all elements to their right).
+     *
      * @throws IllegalArgumentException if array is null or empty
      */
     public static int[] leadersInArray(int[] array) {
@@ -351,6 +354,36 @@ public class Basics {
         }
         Collections.reverse(leaders);
         return leaders.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    /**
+     * Problem: Find the maximum sum of a contiguous subarray (Kadane's Algorithm)
+     * <p>
+     * Example:
+     * Input:  [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+     * Output: 6  // Subarray: [4, -1, 2, 1]
+     * <p>
+     * Constraints:
+     * 1 <= arr.length <= 10^5
+     * -10^4 <= arr[i] <= 10^4
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    public static int findMaxSum(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int max = Integer.MIN_VALUE;
+        int currentSum = 0;
+        for (int i = array.length - 1; i >= 0; i--) {
+            currentSum += array[i];
+            if (currentSum > max) {
+                max = currentSum;
+            }
+            if (currentSum < 0) return 0;
+        }
+        return max;
     }
 
 }
