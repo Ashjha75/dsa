@@ -21,6 +21,7 @@ public class Basics {
         int[] replaceWithMax = replaceWithMax(array);
         int[] leadersInArray = leadersInArray(array);
         int findMaxSum = findMaxSum(array);
+        int containerWithMaxWater = containerWithMaxWater(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -36,6 +37,7 @@ public class Basics {
         System.out.println("- Replace with max Array: " + Arrays.toString(replaceWithMax));
         System.out.println("- Leaders in Array: " + Arrays.toString(leadersInArray));
         System.out.println("-  Max Sum Is: " + findMaxSum);
+        System.out.println("-  Container with max water: " + containerWithMaxWater);
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
@@ -385,5 +387,51 @@ public class Basics {
         }
         return max;
     }
+
+    /**
+     * Problem: Container With Most Water
+     * <p>
+     * Given n non-negative integers where each represents a vertical line
+     * on the x-axis, find two lines that together with the x-axis form a container
+     * which can hold the most water.
+     * <p>
+     * Example:
+     * Input:  [1,8,6,2,5,4,8,3,7]
+     * Output: 49
+     * (Lines at index 1 and 8 form the container: min(8,7) * (8 - 1) = 49)
+     * <p>
+     * Constraints:
+     * 2 <= height.length <= 10^5
+     * 0 <= height[i] <= 10^4
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+
+    static int containerWithMaxWater(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+
+        int left = 0;
+        int right = array.length - 1;
+        int maxArea = 0;
+        while (left < right) {
+
+            int distance = right - left;
+            int height = Math.min(array[left], array[right]);
+            int area = distance * height;
+            maxArea = Math.max(area, maxArea);
+
+            if (array[left] < array[right]) {
+                left++;
+            } else {
+                right--;
+            }
+
+        }
+        return maxArea;
+    }
+
 
 }
