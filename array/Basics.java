@@ -61,7 +61,9 @@ public class Basics {
     }
 
     /**
-     * Inserts an element at the specified position.
+     * Insert element in specific position.
+     *
+     * @return updated array with new inserted element
      */
     public static int[] insertElement(int[] array, int value, int position) {
         if (array == null) {
@@ -73,43 +75,47 @@ public class Basics {
 
         int[] newArray = new int[array.length + 1];
 
-        // Copy elements before insertion point
+        // copy elements before insertion point
         for (int i = 0; i < position; i++) {
             newArray[i] = array[i];
         }
 
-        // Insert new value
+        // insert new value
         newArray[position] = value;
 
-        // Copy elements after insertion point
+        // copy remaining elements shifted by one
         for (int i = position; i < array.length; i++) {
             newArray[i + 1] = array[i];
         }
 
         return newArray;
     }
-
     /**
-     * Deletes the first occurrence of a value from the array.
+     * Delete the element at specific positions
+     *
+     * @return updated array
      */
-    public static int[] deleteElement(int[] array, int value) {
+    public static int[] deleteElement(int[] array, int position) {
         if (array == null) {
             throw new IllegalArgumentException("Array cannot be null");
         }
-
-        int index = customSearch(array, value);
-        if (index == -1) {
-            System.out.println("Value not found, no deletion performed.");
-            return array;
+        if (position < 0 || position >= array.length) {
+            throw new IllegalArgumentException("Invalid position: " + position);
+        }
+        if (array.length == 1) {
+            return new int[0];
         }
 
         int[] newArray = new int[array.length - 1];
-        int j = 0;
 
-        for (int i = 0; i < array.length; i++) {
-            if (i != index) {
-                newArray[j++] = array[i];
-            }
+        // copy elements before the position
+        for (int i = 0; i < position; i++) {
+            newArray[i] = array[i];
+        }
+
+        // copy elements after the position shifted left by one
+        for (int i = position + 1; i < array.length; i++) {
+            newArray[i - 1] = array[i];
         }
 
         return newArray;
