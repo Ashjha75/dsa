@@ -28,6 +28,8 @@ public class Basics {
         int[] moveZerosToEnd = moveZerosToEnd(array);
         int findMinSubarraySum = findMinSubarraySum(array);
         printMinimumSumSubArray(array);
+        int maxProfit = maxProfit(array);
+
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -49,6 +51,7 @@ public class Basics {
         System.out.println("-  Max length of subarray with ones: " + maxones);
         System.out.println("- Move Zeros to end: " + Arrays.toString(moveZerosToEnd));
         System.out.println("-  Min Sum Is: " + findMinSubarraySum);
+        System.out.println("-  Max profit is: " + maxProfit);
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -724,5 +727,68 @@ public class Basics {
         }
         System.out.println("]");
     }
+
+    /**
+     * Problem: Best Time to Buy and Sell Stock
+     * <p>
+     * You are given an array {@code prices}, where {@code prices[i]} represents the stock price on the {@code i-th} day.
+     * Find the maximum profit you can achieve by buying and selling the stock once.
+     * </p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  [7, 1, 5, 3, 6, 4]
+     * Output: 5
+     * Explanation:
+     * Buy on day 2 (price = 1), sell on day 5 (price = 6), profit = 6 - 1 = 5
+     * </pre>
+     *
+     * <p><b>Approaches:</b></p>
+     * <ul>
+     *   <li><b>1st  Brute Force (O(n²)):</b> Try every pair of (buy, sell) days and find the max profit.
+     *       - Two nested loops → inefficient for large inputs.</li>
+     *   <li><b>2nd Optimized with Right-Max Array (O(n)): </b> Precompute the max price to the right for each day,
+     *       then compute potential profits by subtracting the current price from that right max.</li>
+     *   <li><b>3rd Most Optimal Single Pass (O(n)): </b> Track the minimum price so far and compute profit at each step
+     *       as {@code prices[i] - minPrice}. Update max profit dynamically.</li>
+     * </ul>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     *
+     * @param prices array of stock prices
+     * @return maximum achievable profit from one buy-sell transaction
+     * @throws IllegalArgumentException if prices array is null or empty
+     */
+    public static int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+
+        // Track the minimum price (best buy so far)
+        int minPrice = prices[0];
+        // Track the maximum profit achievable
+        int maxProfit = 0;
+
+        // Iterate through all prices
+        for (int i = 1; i < prices.length; i++) {
+
+            // Update minimum price if a lower price is found
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            }
+
+            // Calculate potential profit if selling at current price
+            int profit = prices[i] - minPrice;
+
+            // Update max profit if current profit is higher
+            if (profit > maxProfit) {
+                maxProfit = profit;
+            }
+        }
+
+        return maxProfit;
+    }
+
 
 }
