@@ -22,6 +22,7 @@ public class Basics {
         int[] leadersInArray = leadersInArray(array);
         int findMaxSum = findMaxSum(array);
         int containerWithMaxWater = containerWithMaxWater(array);
+        int trapSum = trap(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -38,6 +39,7 @@ public class Basics {
         System.out.println("- Leaders in Array: " + Arrays.toString(leadersInArray));
         System.out.println("-  Max Sum Is: " + findMaxSum);
         System.out.println("-  Container with max water: " + containerWithMaxWater);
+        System.out.println("-  Trapping rain water: " + trapSum);
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
@@ -90,6 +92,7 @@ public class Basics {
 
         return newArray;
     }
+
     /**
      * Delete the element at specific positions
      *
@@ -437,6 +440,69 @@ public class Basics {
 
         }
         return maxArea;
+    }
+
+    /**
+     * Problem: Trapping Rain Water
+     * <p>
+     * Given n non-negative integers representing an elevation map where the width
+     * of each bar is 1, compute how much water it can trap after raining.
+     * <p>
+     * Example:
+     * Input:  [0,1,0,2,1,0,1,3,2,1,2,1]
+     * Output: 6
+     * <p>
+     * Constraints:
+     * 1 <= height.length <= 2 * 10^4
+     * 0 <= height[i] <= 10^5
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
+     */
+    public class TrappingRainWater {
+
+        /**
+         * Calculates the total trapped rain water.
+         *
+         * @param height the elevation map
+         * @return total trapped water
+         */
+        public static int trap(int[] height) {
+
+            if (height == null || height.length == 0) {
+                throw new IllegalArgumentException("Array cannot be null or empty");
+            }
+
+            int n = height.length;
+            int[] left = new int[n];
+            int[] right = new int[n];
+            int totalWater = 0;
+
+            // Step 1: Fill left array (max height to the left of each index)
+            left[0] = height[0];
+            for (int i = 1; i < n; i++) {
+                left[i] = Math.max(left[i - 1], height[i]);
+            }
+
+            // Step 2: Fill right array (max height to the right of each index)
+            right[n - 1] = height[n - 1];
+            for (int i = n - 2; i >= 0; i--) {
+                right[i] = Math.max(right[i + 1], height[i]);
+            }
+
+            // Step 3: Calculate trapped water
+            for (int i = 0; i < n; i++) {
+                totalWater += Math.min(left[i], right[i]) - height[i];
+            }
+
+            return totalWater;
+        }
+
+        // Example usage
+        public static void main(String[] args) {
+            int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+            System.out.println("Total trapped water: " + trap(height)); // Output: 6
+        }
     }
 
 
