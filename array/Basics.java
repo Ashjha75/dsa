@@ -25,6 +25,7 @@ public class Basics {
         int trapSum = trap(array);
         printFrequencies(array);
         int maxones = maxones(array);
+        int[] moveZerosToEnd = moveZerosToEnd(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -43,6 +44,8 @@ public class Basics {
         System.out.println("-  Container with max water: " + containerWithMaxWater);
         System.out.println("-  Trapping rain water: " + trapSum);
         System.out.println("-  Max length of subarray with ones: " + maxones);
+        System.out.println("- Move Zeros to end: " + Arrays.toString(moveZerosToEnd));
+
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
@@ -575,6 +578,46 @@ public class Basics {
             }
         }
         return max;
+    }
+
+    /**
+     * Problem: Move All Zeros to the End of the Array.
+     * <p>
+     * Given an integer array, move all zeros to the end while maintaining
+     * the relative order of the non-zero elements. The operation must be done
+     * in-place (without using extra arrays).
+     * </p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  [0, 1, 0, 3, 12]
+     * Output: [1, 3, 12, 0, 0]
+     * </pre>
+     *
+     * <p><b>Constraints:</b></p>
+     * <ul>
+     *   <li>1 ≤ array.length ≤ 10⁵</li>
+     *   <li>-10⁹ ≤ array[i] ≤ 10⁹</li>
+     * </ul>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     */
+    public static int[] moveZerosToEnd(int[] array) {
+        array = new int[]{8, 0, 1, 3, 0, 0, 5};
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int pointer = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != 0) {
+                array[pointer++] = array[i];
+            }
+        }
+        while (pointer < array.length) {
+            array[pointer++] = 0;
+        }
+        return array;
     }
 
 }
