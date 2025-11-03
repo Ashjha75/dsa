@@ -26,6 +26,8 @@ public class Basics {
         printFrequencies(array);
         int maxones = maxones(array);
         int[] moveZerosToEnd = moveZerosToEnd(array);
+        int findMinSubarraySum = findMinSubarraySum(array);
+
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -45,6 +47,7 @@ public class Basics {
         System.out.println("-  Trapping rain water: " + trapSum);
         System.out.println("-  Max length of subarray with ones: " + maxones);
         System.out.println("- Move Zeros to end: " + Arrays.toString(moveZerosToEnd));
+        System.out.println("-  Min Sum Is: " + findMinSubarraySum);
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -618,6 +621,52 @@ public class Basics {
             array[pointer++] = 0;
         }
         return array;
+    }
+
+
+    /**
+     * Problem: Minimum Sum Subarray.
+     * <p>
+     * Given an integer array, find the contiguous subarray (containing at least one element)
+     * which has the smallest possible sum, and return that sum.
+     * </p>
+     *
+     * <p><b>Example 1:</b></p>
+     * <pre>
+     * Input:  [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+     * Output: -6
+     * Explanation: The subarray [-2, 1, -3, 4, -1, 2, 1, -5, 4] has a minimum-sum subarray [-5, 4, -1, 2, 1] = -6.
+     * </pre>
+     *
+     * <p><b>Example 2:</b></p>
+     * <pre>
+     * Input:  [1, 2, 3, 4]
+     * Output: 1
+     * Explanation: The smallest subarray is just [1].
+     * </pre>
+     *
+     * <p><b>Approach:</b></p>
+     * <ul>
+     *   <li>Use a variation of Kadane's algorithm to track the current and minimum sums.</li>
+     *   <li>At each step, update the current sum as the minimum of the current element
+     *   or the current element added to the previous current sum.</li>
+     *   <li>Track the overall minimum sum seen so far.</li>
+     * </ul>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     */
+    public static int findMinSubarraySum(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int currentSum = array[0];
+        int minSum = array[0];
+        for (int value : array) {
+            currentSum = Math.min(value, currentSum + value);
+            minSum = Math.min(minSum, value);
+        }
+        return (Math.max(minSum, 0));
     }
 
 }
