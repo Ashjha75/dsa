@@ -23,6 +23,7 @@ public class Basics {
         int findMaxSum = findMaxSum(array);
         int containerWithMaxWater = containerWithMaxWater(array);
         int trapSum = trap(array);
+        printFrequencies(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -459,50 +460,81 @@ public class Basics {
      * Time Complexity: O(n)
      * Space Complexity: O(n)
      */
-    public class TrappingRainWater {
 
-        /**
-         * Calculates the total trapped rain water.
-         *
-         * @param height the elevation map
-         * @return total trapped water
-         */
-        public static int trap(int[] height) {
+    public static int trap(int[] height) {
 
-            if (height == null || height.length == 0) {
-                throw new IllegalArgumentException("Array cannot be null or empty");
-            }
-
-            int n = height.length;
-            int[] left = new int[n];
-            int[] right = new int[n];
-            int totalWater = 0;
-
-            // Step 1: Fill left array (max height to the left of each index)
-            left[0] = height[0];
-            for (int i = 1; i < n; i++) {
-                left[i] = Math.max(left[i - 1], height[i]);
-            }
-
-            // Step 2: Fill right array (max height to the right of each index)
-            right[n - 1] = height[n - 1];
-            for (int i = n - 2; i >= 0; i--) {
-                right[i] = Math.max(right[i + 1], height[i]);
-            }
-
-            // Step 3: Calculate trapped water
-            for (int i = 0; i < n; i++) {
-                totalWater += Math.min(left[i], right[i]) - height[i];
-            }
-
-            return totalWater;
+        if (height == null || height.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
         }
 
-        // Example usage
-        public static void main(String[] args) {
-            int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-            System.out.println("Total trapped water: " + trap(height)); // Output: 6
+        int n = height.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        int totalWater = 0;
+
+        // Step 1: Fill left array (max height to the left of each index)
+        left[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            left[i] = Math.max(left[i - 1], height[i]);
         }
+
+        // Step 2: Fill right array (max height to the right of each index)
+        right[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            right[i] = Math.max(right[i + 1], height[i]);
+        }
+
+        // Step 3: Calculate trapped water
+        for (int i = 0; i < n; i++) {
+            totalWater += Math.min(left[i], right[i]) - height[i];
+        }
+
+        return totalWater;
+    }
+
+
+    /**
+     * Problem: Print Frequency of Elements in a Sorted Array.
+     * <p>
+     * Given a sorted array of integers, print each unique element along with
+     * its frequency of occurrence. The array is assumed to be sorted in
+     * non-decreasing order.
+     * </p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  [1, 1, 2, 2, 2, 3, 4, 4]
+     * Output:
+     * 1 → 2
+     * 2 → 3
+     * 3 → 1
+     * 4 → 2
+     * </pre>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     *
+     * @param array the sorted input array
+     */
+    public static void printFrequencies(int[] array) {
+
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+
+        int count = 1;
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == array[i - 1]) {
+                count++;
+            } else {
+                System.out.println(array[i - 1] + " → " + count);
+                count = 1;
+            }
+        }
+
+        // Print frequency of the last element
+        System.out.println(array[array.length - 1] + " → " + count);
     }
 
 
