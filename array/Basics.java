@@ -24,6 +24,7 @@ public class Basics {
         int containerWithMaxWater = containerWithMaxWater(array);
         int trapSum = trap(array);
         printFrequencies(array);
+        int maxones = maxones(array);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
         System.out.println("- Index of 11: " + index);
@@ -41,6 +42,8 @@ public class Basics {
         System.out.println("-  Max Sum Is: " + findMaxSum);
         System.out.println("-  Container with max water: " + containerWithMaxWater);
         System.out.println("-  Trapping rain water: " + trapSum);
+        System.out.println("-  Max length of subarray with ones: " + maxones);
+
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
     }
 
@@ -537,5 +540,41 @@ public class Basics {
         System.out.println(array[array.length - 1] + " → " + count);
     }
 
+    /**
+     * Problem: Maximum Consecutive 1s in a Binary Array.
+     * <p>
+     * Given a binary array (containing only 0s and 1s), find the length of the
+     * longest contiguous subarray consisting entirely of 1s.
+     * </p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  [1, 1, 0, 1, 1, 1]
+     * Output: 3
+     * </pre>
+     *
+     * <p><b>Follow-up:</b> If allowed to flip at most one 0 → 1, find the maximum
+     * possible length of consecutive 1s.</p>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     */
+    public static int maxones(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int max = 0;
+        int state = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == 1) {
+                state++;
+                max = Math.max(state, max);
+
+            } else {
+                state = 0;
+            }
+        }
+        return max;
+    }
 
 }
