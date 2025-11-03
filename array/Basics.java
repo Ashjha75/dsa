@@ -27,6 +27,7 @@ public class Basics {
         int maxones = maxones(array);
         int[] moveZerosToEnd = moveZerosToEnd(array);
         int findMinSubarraySum = findMinSubarraySum(array);
+        printMinimumSumSubArray(array);
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -660,13 +661,68 @@ public class Basics {
         if (array == null || array.length == 0) {
             throw new IllegalArgumentException("Array cannot be null or empty");
         }
+
         int currentSum = array[0];
         int minSum = array[0];
-        for (int value : array) {
-            currentSum = Math.min(value, currentSum + value);
-            minSum = Math.min(minSum, value);
+
+        for (int i = 1; i < array.length; i++) {
+            currentSum = Math.min(array[i], currentSum + array[i]);
+            minSum = Math.min(minSum, currentSum);
         }
-        return (Math.max(minSum, 0));
+
+        return minSum;
+    }
+
+    /**
+     * Problem: Print Elements of the Minimum Sum Subarray (Kadane’s Variation)
+     * <p>
+     * Given an integer array, find and print the contiguous subarray (containing at least one element)
+     * which has the smallest possible sum.
+     * </p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  [4, -1, -2, 5, 3, -6, 2, 4, -3, 2, 3, -2, 3]
+     * Output:
+     * Minimum Sum: -6
+     * Subarray: [-6]
+     * </pre>
+     */
+    public static void printMinimumSumSubArray(int[] array) {
+        if (array == null || array.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+
+        int currentSum = array[0];
+        int minSum = array[0];
+
+        int start = 0;
+        int end = 0;
+        int tempStart = 0;
+
+        for (int i = 1; i < array.length; i++) {
+            // Decide whether to start a new subarray or continue
+            if (array[i] < currentSum + array[i]) {
+                currentSum = array[i];
+                tempStart = i;
+            } else {
+                currentSum += array[i];
+            }
+
+            // Update global minimum
+            if (currentSum < minSum) {
+                minSum = currentSum;
+                start = tempStart;
+                end = i;
+            }
+        }
+
+        // Print the subarray
+        System.out.print("Minimum Sum Subarray: [");
+        for (int i = start; i <= end; i++) {
+            System.out.print(array[i] + (i < end ? ", " : ""));
+        }
+        System.out.println("]");
     }
 
 }
