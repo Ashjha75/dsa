@@ -1,9 +1,6 @@
 package array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Basics {
     public static void main(String[] args) {
@@ -29,7 +26,7 @@ public class Basics {
         int findMinSubarraySum = findMinSubarraySum(array);
         printMinimumSumSubArray(array);
         int maxProfit = maxProfit(array);
-
+        boolean hasZeroSumSubarray = hasZeroSumSubarray(array);
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -52,6 +49,7 @@ public class Basics {
         System.out.println("- Move Zeros to end: " + Arrays.toString(moveZerosToEnd));
         System.out.println("-  Min Sum Is: " + findMinSubarraySum);
         System.out.println("-  Max profit is: " + maxProfit);
+        System.out.println("-  Is there any sum with zero: " + hasZeroSumSubarray);
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -790,5 +788,58 @@ public class Basics {
         return maxProfit;
     }
 
+    /**
+     * Problem: Subarray With Zero Sum
+     * <p>
+     * You are given an integer array {@code arr}. Determine whether it contains
+     * any **non-empty** subarray whose elements sum to zero.
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  [4, 2, -6, 1]
+     * Output: true
+     * Explanation:
+     * Subarray [4, 2, -6] has sum = 0.
+     * </pre>
+     *
+     * <p><b>Approaches:</b></p>
+     * <ul>
+     *   <li><b>1st Brute Force (O(n²)):</b> Check all subarray sums using nested loops.
+     *       - Inefficient for large inputs.</li>
+     *
+     *   <li><b>2nd Optimized Using Prefix Sum + HashSet (O(n)):</b>
+     *       - Maintain a running prefix sum.
+     *       - If the prefix sum becomes zero or repeats, it means there exists
+     *         a subarray whose sum is zero.</li>
+     * </ul>
+     *
+     * <p><b>Key Idea (Optimal Approach):</b><br>
+     * If the cumulative sum repeats at two different indices, the elements between them sum to zero.
+     * </p>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(n) for storing prefix sums</p>
+     *
+     * @param arr the input array of integers
+     * @return {@code true} if a zero-sum subarray exists, otherwise {@code false}
+     * @throws IllegalArgumentException if the input array is null or empty
+     */
+    public static boolean hasZeroSumSubarray(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int sum = 0;
+
+        Set<Integer> set = new HashSet<>();
+        for(int value : arr) {
+            sum += value;
+            if (sum == 0 || set.contains(sum)) {
+                return true;
+            }
+            set.add(sum);
+        }
+
+        return false;
+    }
 
 }
