@@ -192,7 +192,8 @@ public class Advance {
      */
     public static int[][] transpose(int[][] m) {
         if (m == null) return null;
-        int r = m.length, c = m[0].length;
+        int r = m.length;
+        int c = m[0].length;
         int[][] t = new int[c][r];
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
