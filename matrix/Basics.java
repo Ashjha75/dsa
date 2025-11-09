@@ -32,10 +32,10 @@ public class Basics {
 
 //        System.out.println("Transpose of Matrix :");
 //        printMatrix(transpose(matrix1));
+        System.out.println("Search in Matrix :  " + Arrays.toString(searchSortedMatrix(matrix1, 8)));
 
         System.out.println("rotate90ClockwiseInPlace of Matrix :");
         printMatrix(rotate90ClockwiseInPlace(matrix1));
-        System.out.println("Search in Matrix :  " + Arrays.toString(searchSortedMatrix(matrix1, 8)));
 
     }
 
