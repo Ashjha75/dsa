@@ -28,6 +28,7 @@ public class Basics {
         printMinimumSumSubArray(array);
         int maxProfit = maxProfit(array);
         boolean hasZeroSumSubarray = hasZeroSumSubarray(array);
+        int maxIndexDiff = maxIndexDiff(new int[]{4, -1, -2, 5, 3, -6, 2, 4, -3, 2, 3, -2, 3});
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -52,6 +53,7 @@ public class Basics {
         System.out.println("-  Min Sum Is: " + findMinSubarraySum);
         System.out.println("-  Max profit is: " + maxProfit);
         System.out.println("-  Is there any sum with zero: " + hasZeroSumSubarray);
+        System.out.println("-  Max index Differnec is : " + maxIndexDiff);
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -911,6 +913,74 @@ public class Basics {
             }
         }
 
+        return ans;
+    }
+
+    /**
+     * Problem: Maximum Index Difference (j - i) such that arr[j] > arr[i]
+     *
+     * <p>You are given an integer array {@code arr}. Find the maximum possible value of
+     * {@code (j - i)} such that:
+     *
+     * <pre>
+     * i < j  AND  arr[j] > arr[i]
+     * </pre>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  arr = [3, 5, 4, 2, 6]
+     * Valid pairs (i, j) where arr[j] > arr[i]:
+     * (0,1), (0,2), (0,4), (2,4), (3,4)
+     *
+     * Maximum j-i is (0,4) → answer = 4
+     * </pre>
+     *
+     * <p><b>Approaches:</b></p>
+     * <ul>
+     *   <li><b>1. Brute Force (O(n²)):</b>
+     *       Check all pairs (i, j) with i < j. Very slow for large inputs.</li>
+     *
+     *   <li><b>2. Precompute + Two Pointer (O(n)) — Recommended:</b>
+     *     <ul>
+     *       <li>Create {@code leftMin[]} where {@code leftMin[i]} is the minimum value from index 0 to i.</li>
+     *       <li>Create {@code rightMax[]} where {@code rightMax[j]} is the maximum value from index j to end.</li>
+     *       <li>Use two pointers (i = 0, j = 0). If {@code leftMin[i] < rightMax[j]}, move j and update result.
+     *           Else move i.</li>
+     *     </ul>
+     *     This avoids unnecessary comparisons and solves efficiently.</li>
+     * </ul>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(n) (due to helper arrays)</p>
+     *
+     * @param arr input array
+     * @return maximum difference (j - i) satisfying arr[j] > arr[i], or 0 if no such pair exists
+     * @throws IllegalArgumentException if {@code arr} is null or empty
+     */
+    public static int maxIndexDiff(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int n = arr.length;
+
+        int[] leftMin = new int[n];
+        int[] rightMax = new int[n];
+
+        leftMin[0] = arr[0];
+        for (int i = 1; i < n; i++) leftMin[i] = Math.min(leftMin[i - 1], arr[i]);
+
+        rightMax[n - 1] = arr[n - 1];
+        for (int i = n - 2; i >= 0; i--) rightMax[i] = Math.max(rightMax[i + 1], arr[i]);
+
+        int ans = 0, i = 0, j = 0;
+        while (i < n && j < n) {
+            if (leftMin[i] < rightMax[j]) {   // strict '>' condition for arr[j] > arr[i]
+                ans = Math.max(ans, j - i);
+                j++;
+            } else {
+                i++;
+            }
+        }
         return ans;
     }
 
