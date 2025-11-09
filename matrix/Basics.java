@@ -16,9 +16,9 @@ public class Basics {
 
     public static void main(String[] args) {
         int[][] matrix1 = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
+                {1, 4, 7, 10},
+                {2, 5, 8, 12},
+                {3, 6, 9, 14}
         };
 
         int[][] matrix2 = {
@@ -35,6 +35,8 @@ public class Basics {
 
         System.out.println("rotate90ClockwiseInPlace of Matrix :");
         printMatrix(rotate90ClockwiseInPlace(matrix1));
+        System.out.println("Search in Matrix :  " + Arrays.toString(searchSortedMatrix(matrix1, 8)));
+
     }
 
     /**
@@ -59,7 +61,7 @@ public class Basics {
         for (int[] row : m) {
             System.out.println(Arrays.toString(row));
         }
-        System.out.print("]");
+        System.out.println("]");
 
     }
 
@@ -110,7 +112,7 @@ public class Basics {
         }
         transpose(m);
         for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < n/2; j++) {
+            for (int j = 0; j < n / 2; j++) {
                 int swap = m[i][j];
                 m[i][j] = m[i][n - 1 - j];
                 m[i][n - 1 - j] = swap;
@@ -118,5 +120,92 @@ public class Basics {
         }
         return m;
     }
+
+    /**
+     * Problem: Search an element in a matrix that is sorted both row-wise (left to right)
+     * and column-wise (top to bottom).
+     *
+     * <p>The matrix guarantees:
+     * <ul>
+     *   <li>Each row is sorted in non-decreasing order.</li>
+     *   <li>Each column is sorted in non-decreasing order.</li>
+     * </ul>
+     *
+     * <p><b>Goal:</b> Determine whether the target value exists in the matrix and return its position.</p>
+     *
+     * <p><b>Approaches:</b></p>
+     * <ul>
+     *   <li><b>1. Brute Force (O(r·c)):</b>
+     *       Scan every cell. Simple, but inefficient for large matrices.</li>
+     *
+     *   <li><b>2. Row Binary Search (O(r·log c)):</b>
+     *       Since rows are sorted, apply binary search per row.</li>
+     *
+     *   <li><b>3. Optimal Staircase Search (O(r + c)) — Recommended:</b>
+     *       Start from the top-right corner:
+     *       <ul>
+     *         <li>If the current value is greater than target → move left (values decrease)</li>
+     *         <li>If the current value is less than target → move down (values increase)</li>
+     *         <li>If equal → found</li>
+     *       </ul>
+     *   </li>
+     * </ul>
+     *
+     * <p><b>Time Complexity:</b> O(r + c)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Matrix:
+     * [
+     *   [1, 4, 7, 10],
+     *   [2, 5, 8, 12],
+     *   [3, 6, 9, 14]
+     * ]
+     *
+     * Target: 8 → Output: [1, 2]
+     * Target: 13 → Output: [-1, -1]
+     * </pre>
+     *
+     * @param matrix the sorted matrix to search in
+     * @param target the value to search for
+     * @return an array of size 2: {@code [row, col]} if found, otherwise {@code [-1, -1]}
+     * @throws IllegalArgumentException if matrix is null or empty
+     */
+    public static int[] searchSortedMatrix(int[][] matrix, int target) {
+        // Input validation
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            throw new IllegalArgumentException("Matrix cannot be null or empty");
+        }
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        // Start from top-right corner
+        int row = 0;
+        int col = cols - 1;
+
+        // Staircase search
+        while (row < rows && col >= 0) {
+            int current = matrix[row][col];
+
+            if (current == target) {
+                // Found the target
+                return new int[]{row, col};
+            } else if (current > target) {
+                // Current value is too large, move left
+                col--;
+            } else {
+                // Current value is too small, move down
+                row++;
+            }
+        }
+
+        // Target not found
+        return new int[]{-1, -1};
+    }
+
+
+
 
 }
