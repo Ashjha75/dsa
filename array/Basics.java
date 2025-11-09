@@ -29,6 +29,7 @@ public class Basics {
         int maxProfit = maxProfit(array);
         boolean hasZeroSumSubarray = hasZeroSumSubarray(array);
         int maxIndexDiff = maxIndexDiff(new int[]{4, -1, -2, 5, 3, -6, 2, 4, -3, 2, 3, -2, 3});
+        int[] twoSumSorted= twoSumSorted(new int[]{1,2,4,6,7,9,12,90},10);
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -54,6 +55,7 @@ public class Basics {
         System.out.println("-  Max profit is: " + maxProfit);
         System.out.println("-  Is there any sum with zero: " + hasZeroSumSubarray);
         System.out.println("-  Max index Differnec is : " + maxIndexDiff);
+        System.out.println("-  Two Sum sorted : " + Arrays.toString(twoSumSorted));
 
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
@@ -972,7 +974,9 @@ public class Basics {
         rightMax[n - 1] = arr[n - 1];
         for (int i = n - 2; i >= 0; i--) rightMax[i] = Math.max(rightMax[i + 1], arr[i]);
 
-        int ans = 0, i = 0, j = 0;
+        int ans = 0;
+        int i = 0;
+        int j = 0;
         while (i < n && j < n) {
             if (leftMin[i] < rightMax[j]) {   // strict '>' condition for arr[j] > arr[i]
                 ans = Math.max(ans, j - i);
@@ -982,6 +986,70 @@ public class Basics {
             }
         }
         return ans;
+    }
+
+    /**
+     * Problem: Two Sum in a Sorted Array
+     * <p>
+     * You are given a sorted integer array {@code nums} (sorted in non-decreasing order)
+     * and a target value {@code target}. Find two numbers such that:
+     *
+     * <pre>
+     * nums[left] + nums[right] == target
+     * </pre>
+     * <p>
+     * Return their indices (or the numbers themselves depending on requirement).
+     *
+     * <p><b>Approaches:</b></p>
+     * <ul>
+     *
+     *   <li><b>1. Brute Force (O(n²)):</b>
+     *       Check every pair. Not efficient.</li>
+     *
+     *   <li><b>2. Two-Pointer Method (O(n)) — Recommended for Sorted Arrays:</b>
+     *     <ul>
+     *       <li>Initialize two pointers:
+     *           <pre>left = 0, right = nums.length - 1</pre></li>
+     *       <li>If {@code nums[left] + nums[right] == target} → solution found.</li>
+     *       <li>If the sum is too small → increase {@code left} (need bigger sum).</li>
+     *       <li>If the sum is too large → decrease {@code right} (need smaller sum).</li>
+     *     </ul>
+     *   </li>
+     *
+     * </ul>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * nums = [1, 2, 3, 4, 6], target = 6
+     * Output: [1, 3]  // because nums[1] + nums[3] = 2 + 4 = 6
+     * </pre>
+     *
+     * @param nums   sorted array of integers
+     * @param target the required sum
+     * @return array {@code [leftIndex, rightIndex]} if found, otherwise {@code [-1, -1]}
+     * @throws IllegalArgumentException if nums is null or empty
+     */
+    public static int[] twoSumSorted(int[] nums, int target) {
+
+        if (nums == null || nums.length == 0) {
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        int l = 0;
+        int r = nums.length - 1;
+        while (l < r) {
+            if (nums[l] + nums[r] == target) {
+                return new int[]{l, r };
+            }else if (nums[l] + nums[r] < target) {
+                l++;
+            }
+            else{
+                r--;
+            }
+        }
+        return new int[]{-1, -1};
     }
 
 
