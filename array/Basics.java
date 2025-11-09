@@ -21,6 +21,7 @@ public class Basics {
         int containerWithMaxWater = containerWithMaxWater(array);
         int trapSum = trap(array);
         printFrequencies(array);
+        int trapSumOptimized = trapOptimized(new int[]{4, -1, -2, 5, 3, -6, 2, 4, -3, 2, 3, -2, 3});
         int maxones = maxones(array);
         int[] moveZerosToEnd = moveZerosToEnd(array);
         int findMinSubarraySum = findMinSubarraySum(array);
@@ -45,6 +46,7 @@ public class Basics {
         System.out.println("-  Max Sum Is: " + findMaxSum);
         System.out.println("-  Container with max water: " + containerWithMaxWater);
         System.out.println("-  Trapping rain water: " + trapSum);
+        System.out.println("-  Trapping rain water Optimized: " + trapSumOptimized);
         System.out.println("-  Max length of subarray with ones: " + maxones);
         System.out.println("- Move Zeros to end: " + Arrays.toString(moveZerosToEnd));
         System.out.println("-  Min Sum Is: " + findMinSubarraySum);
@@ -831,7 +833,7 @@ public class Basics {
         int sum = 0;
 
         Set<Integer> set = new HashSet<>();
-        for(int value : arr) {
+        for (int value : arr) {
             sum += value;
             if (sum == 0 || set.contains(sum)) {
                 return true;
@@ -841,5 +843,76 @@ public class Basics {
 
         return false;
     }
+
+    /**
+     * Problem: Trapping Rain Water (Space Optimized)
+     * <p>
+     * Given an array {@code height} where each element represents the height of a bar,
+     * compute how much total water can be trapped after raining.
+     *
+     * <p><b>Key Insight:</b><br>
+     * Water above index {@code i} is determined by:
+     * {@code min(maxLeft, maxRight) - height[i]}.
+     *
+     * <p><b>Approaches:</b></p>
+     * <ul>
+     *   <li><b>1. Brute Force (O(n²)):</b> For each index, scan left and right to find boundaries.</li>
+     *   <li><b>2. Prefix Max Arrays (O(n) time, O(n) space):</b>
+     *       Precompute leftMax[] and rightMax[].</li>
+     *   <li><b>3. Two Pointer Method (O(n) time, O(1) extra space) — Recommended:</b>
+     *       Maintain pointers {@code left} and {@code right}, and dynamic
+     *       boundary trackers {@code leftMax} and {@code rightMax}.
+     *       Move the pointer with the smaller boundary inward.</li>
+     * </ul>
+     *
+     * <p><b>Time Complexity:</b> O(n)<br>
+     * <b>Space Complexity:</b> O(1)</p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * Input:  height = [4, 2, 0, 3, 2, 5]
+     * Output: 9
+     * Explanation: Water trapped = 2 + 4 + 1 + 2 = 9
+     * </pre>
+     *
+     * @param height non-negative heights of bars
+     * @return total units of trapped water
+     * @throws IllegalArgumentException if height array is null or empty
+     */
+    public static int trapOptimized(int[] height) {
+        if (height == null || height.length == 0) {
+            throw new IllegalArgumentException("Heights cannot be null or empty");
+        }
+
+        int left = 0;
+        int right = height.length - 1;
+        int leftMax = 0;
+        int rightMax = 0;
+        int ans = 0;
+
+        while (left <= right) {
+
+            if (leftMax <= rightMax) {
+                // left side is bounded
+                if (height[left] < leftMax) {
+                    ans += leftMax - height[left];
+                } else {
+                    leftMax = height[left];
+                }
+                left++;
+            } else {
+                // right side is bounded
+                if (height[right] < rightMax) {
+                    ans += rightMax - height[right];
+                } else {
+                    rightMax = height[right];
+                }
+                right--;
+            }
+        }
+
+        return ans;
+    }
+
 
 }
