@@ -5,12 +5,14 @@ public class Base {
         int[] array = new int[]{4, -1, -2, 5, 3, -6, 2, 4, -3, 2, 3, -2, 3};
         printNaturalNumber(50);
         int sum = printSumOfNaturalNumber(5);
-        int pow = findPowerOfNum(5,6);
+        int pow = findPowerOfNum(5, 6);
+        int paths = countPathInMatrics(3, 4);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
 
         System.out.println(sum);
         System.out.println(pow);
+        System.out.println(paths);
 
         System.out.println("|||||----------------------------------------------------------------------------------------------------|||||");
 
@@ -40,6 +42,16 @@ public class Base {
         if (num == 0) {
             return 0;
         }
-        return num * findPowerOfNum(num , pow - 1);
+        return num * findPowerOfNum(num, pow - 1);
+    }
+
+    public static int countPathInMatrics(int num1, int num2) {
+        if (num1 == 1 || num2 == 1) {
+            return 1;
+        }
+        int rightPathSum = countPathInMatrics(num1, num2 - 1);
+        int downPathSum = countPathInMatrics(num1 - 1, num2);
+
+        return downPathSum + rightPathSum;
     }
 }
