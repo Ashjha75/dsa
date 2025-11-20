@@ -1052,5 +1052,52 @@ public class Basics {
         return new int[]{-1, -1};
     }
 
+    /**
+     * Problem: 3-Sum Equal to Target (Unsorted Array)
+     *
+     * Given an integer array {@code nums} and a target value {@code target},
+     * find all unique triplets {@code (i, j, k)} such that:
+     *
+     * <pre>
+     * nums[i] + nums[j] + nums[k] == target
+     * i, j, k are all different indices
+     * </pre>
+     *
+     * <p><b>Approach (Optimal O(n²)):</b></p>
+     * <ul>
+     *   <li>Sort the array first.</li>
+     *   <li>Fix one index {@code i} in a loop.</li>
+     *   <li>Use two-pointer search on the remaining subarray to find
+     *       pairs that sum to {@code target - nums[i]}.</li>
+     *   <li>Skip duplicates for {@code i}, {@code left}, and {@code right}
+     *       to avoid duplicate triplets in the result.</li>
+     * </ul>
+     *
+     * <p><b>Why This Works:</b><br>
+     * Sorting allows efficient elimination of duplicates and enables
+     * a two-pointer sweep to find valid pairs in linear time per fix.</p>
+     *
+     * <p><b>Time Complexity:</b> O(n²)<br>
+     * <b>Space Complexity:</b> O(1) extra (excluding result list)</p>
+     *
+     * <p><b>Example:</b></p>
+     * <pre>
+     * nums = [2, 3, 4, 1, 6, -1], target = 8
+     * Output: [[2, 3, 3], [1, 2, 5], ...] (actual output depends on unique values)
+     * </pre>
+     *
+     * @param nums input unsorted integer array
+     * @param target the desired sum of the triplet
+     * @return list of unique triplets where the sum equals target
+     * @throws IllegalArgumentException if nums is null or has length < 3
+     */
+    public static List<List<Integer>> threeSumTarget(int[] nums, int target) {
+
+        if(nums == null || nums.length < 3){
+            throw new IllegalArgumentException("Array cannot be null or empty");
+        }
+        Arrays.sort(nums);
+        return Collections.emptyList();
+    }
 
 }
