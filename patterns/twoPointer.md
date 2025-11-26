@@ -1,11 +1,10 @@
-
-
 ### 🧠 Two Pointers — Converging (Sorted Array Target Sum)
 
 #### 1. 🧩 Concept / Theory
 
 This technique uses **two pointers starting from opposite ends** of a **sorted array**.
-We move them **towards each other** (converging) based on whether their sum is less than, greater than, or equal to a target value.
+We move them **towards each other** (converging) based on whether their sum is less than, greater than, or equal to a
+target value.
 
 * If the current sum is **too small**, move the **left pointer rightward**.
 * If the current sum is **too large**, move the **right pointer leftward**.
@@ -78,14 +77,12 @@ public class TwoSumSorted {
 #### 6. 🧠 Dry Run
 
 | Step | left | right | arr[left] | arr[right] | sum | Action                    |
-| ---- | ---- | ----- | --------- | ---------- | --- | ------------------------- |
+|------|------|-------|-----------|------------|-----|---------------------------|
 | 1    | 0    | 4     | 1         | 6          | 7   | sum > target → move right |
 | 2    | 0    | 3     | 1         | 4          | 5   | sum < target → move left  |
 | 3    | 1    | 3     | 2         | 4          | 6   | ✅ Found pair              |
 
 ✅ **Answer:** Indices `[1, 3]`
-
-
 
 # 🧠 Two Pointers — Fast & Slow (Cycle Detection)
 
@@ -93,12 +90,14 @@ public class TwoSumSorted {
 
 ### 1. 🧩 Concept / Theory
 
-The **Fast & Slow Pointer** technique (also called the **Tortoise and Hare** algorithm) uses two pointers moving at **different speeds** through a sequence (often a **linked list** or an **array of indices**).
+The **Fast & Slow Pointer** technique (also called the **Tortoise and Hare** algorithm) uses two pointers moving at *
+*different speeds** through a sequence (often a **linked list** or an **array of indices**).
 
 * **Slow pointer** moves **one step** at a time.
 * **Fast pointer** moves **two steps** at a time.
 
-If there’s a **cycle (loop)** in the structure, the fast pointer will eventually “lap” the slow pointer — i.e., both will point to the same node again.
+If there’s a **cycle (loop)** in the structure, the fast pointer will eventually “lap” the slow pointer — i.e., both
+will point to the same node again.
 If there’s **no cycle**, the fast pointer will reach the end (`null`) first.
 
 This is a clever way to detect loops **without using extra memory**, unlike hash-based approaches.
@@ -111,7 +110,8 @@ Use this pattern when:
 
 * You need to **detect a cycle** in a **linked list**.
 * You want to **find the start of the cycle** after confirming its existence.
-* You are working on problems that involve **iterative relationships** or **repeated states** (e.g., detecting cycles in number transformations or arrays).
+* You are working on problems that involve **iterative relationships** or **repeated states** (e.g., detecting cycles in
+  number transformations or arrays).
 
 **Common problems:**
 
@@ -139,7 +139,10 @@ Output: `true`
 class ListNode {
     int val;
     ListNode next;
-    ListNode(int x) { val = x; }
+
+    ListNode(int x) {
+        val = x;
+    }
 }
 
 public class LinkedListCycle {
@@ -178,7 +181,7 @@ public class LinkedListCycle {
 ### 5. ⏱️ Time & Space Complexity
 
 | Complexity        | Explanation                                              |
-| ----------------- | -------------------------------------------------------- |
+|-------------------|----------------------------------------------------------|
 | **Time:** `O(n)`  | In the worst case, both pointers traverse the list once. |
 | **Space:** `O(1)` | Only two pointer variables are used.                     |
 
@@ -187,12 +190,10 @@ public class LinkedListCycle {
 ### 6. 🧠 Dry Run (Visualization)
 
 Consider the linked list:
-`3 → 2 → 0 → -4 ↘`
-          ↑
-             
+`3 → 2 → 0 → -4 ↘`↑
 
 | Step | Slow | Fast | Comment                    |
-| ---- | ---- | ---- | -------------------------- |
+|------|------|------|----------------------------|
 | 1    | 3    | 3    | Start                      |
 | 2    | 2    | 0    | Fast moves 2×              |
 | 3    | 0    | 2    | —                          |
@@ -203,13 +204,12 @@ Consider the linked list:
 ### 🧩 Summary
 
 | Aspect           | Description                                                         |
-| ---------------- | ------------------------------------------------------------------- |
+|------------------|---------------------------------------------------------------------|
 | **Pattern Type** | Fast & Slow Pointers                                                |
 | **Best For**     | Detecting cycles, finding middle, loop entry                        |
 | **Core Idea**    | Two pointers move at different speeds; meeting point signals a loop |
 
 ---
-
 
 # 🧠 Two Pointers — Fixed Separation (Nth Node from End)
 
@@ -258,7 +258,10 @@ Use this pattern when:
 class ListNode {
     int val;
     ListNode next;
-    ListNode(int x) { val = x; }
+
+    ListNode(int x) {
+        val = x;
+    }
 }
 
 public class NthNodeFromEnd {
@@ -301,7 +304,7 @@ public class NthNodeFromEnd {
 ### 5. ⏱️ Time & Space Complexity
 
 | Complexity        | Explanation                                         |
-| ----------------- | --------------------------------------------------- |
+|-------------------|-----------------------------------------------------|
 | **Time:** `O(L)`  | Single pass through the list (`L` = length of list) |
 | **Space:** `O(1)` | Only two pointers used                              |
 
@@ -312,7 +315,7 @@ public class NthNodeFromEnd {
 Linked list: `1 → 2 → 3 → 4 → 5`, `n = 2`
 
 | Step                       | First Pointer | Second Pointer | Comment                         |
-| -------------------------- | ------------- | -------------- | ------------------------------- |
+|----------------------------|---------------|----------------|---------------------------------|
 | Initial                    | 1             | 1              | Move first n=2 steps ahead      |
 | After moving first n steps | 3             | 1              |                                 |
 | Move together              | 4             | 2              |                                 |
@@ -322,8 +325,6 @@ Linked list: `1 → 2 → 3 → 4 → 5`, `n = 2`
 ---
 
 ✅ **Answer:** Node with value `4`
-
-
 
 # 🧠 Two Pointers — In-place Array Modification
 
@@ -404,7 +405,7 @@ public class RemoveElement {
 ### 5. ⏱️ Time & Space Complexity
 
 | Complexity        | Explanation                           |
-| ----------------- | ------------------------------------- |
+|-------------------|---------------------------------------|
 | **Time:** `O(n)`  | Single pass through the array         |
 | **Space:** `O(1)` | In-place modification, no extra space |
 
@@ -415,7 +416,7 @@ public class RemoveElement {
 `nums = [0,1,3,3,4,3,5]`, `val = 3`
 
 | Fast | Slow | nums after operation | Comment              |
-| ---- | ---- | -------------------- | -------------------- |
+|------|------|----------------------|----------------------|
 | 0    | 0    | [0,...]              | 0 ≠ 3 → copy, slow++ |
 | 1    | 1    | [0,1,...]            | 1 ≠ 3 → copy, slow++ |
 | 2    | 2    | [0,1,...]            | 3 = val → skip       |
@@ -428,15 +429,14 @@ public class RemoveElement {
 
 ---
 
-
-
 # 🧠 Two Pointers — String Comparison with Backspaces
 
 ---
 
 ### 1. 🧩 Concept / Theory
 
-This pattern uses **two pointers moving from the end of strings towards the start** to simulate **backspace operations (`#`)** without actually building the resulting strings.
+This pattern uses **two pointers moving from the end of strings towards the start** to simulate **backspace
+operations (`#`)** without actually building the resulting strings.
 
 * **Pointers start at the last character** of each string.
 * Move backwards, **skipping characters that are "backspaced"** using a counter for `#`.
@@ -465,7 +465,8 @@ Use this pattern when:
 ### 3. 💡 Example Problem
 
 > **Problem:**
-> Compare two strings `S` and `T` with `#` representing backspaces, and check if they are equal after applying all backspaces.
+> Compare two strings `S` and `T` with `#` representing backspaces, and check if they are equal after applying all
+> backspaces.
 
 **Input:** `S = "ab#c"`, `T = "ad#c"`
 **Output:** `true` → Both become `"ac"` after backspaces.
@@ -486,23 +487,32 @@ public class BackspaceStringCompare {
 
             // Move i backward, skipping backspaces
             while (i >= 0) {
-                if (S.charAt(i) == '#') { skipS++; i--; }
-                else if (skipS > 0) { skipS--; i--; }
-                else break;
+                if (S.charAt(i) == '#') {
+                    skipS++;
+                    i--;
+                } else if (skipS > 0) {
+                    skipS--;
+                    i--;
+                } else break;
             }
 
             // Move j backward, skipping backspaces
             while (j >= 0) {
-                if (T.charAt(j) == '#') { skipT++; j--; }
-                else if (skipT > 0) { skipT--; j--; }
-                else break;
+                if (T.charAt(j) == '#') {
+                    skipT++;
+                    j--;
+                } else if (skipT > 0) {
+                    skipT--;
+                    j--;
+                } else break;
             }
 
             // Compare current characters
             if (i >= 0 && j >= 0 && S.charAt(i) != T.charAt(j)) return false;
             if ((i >= 0) != (j >= 0)) return false; // One string finished earlier
 
-            i--; j--; // Move to next characters
+            i--;
+            j--; // Move to next characters
         }
 
         return true;
@@ -521,7 +531,7 @@ public class BackspaceStringCompare {
 ### 5. ⏱️ Time & Space Complexity
 
 | Complexity           | Explanation                                                           |
-| -------------------- | --------------------------------------------------------------------- |
+|----------------------|-----------------------------------------------------------------------|
 | **Time:** `O(n + m)` | n = length of S, m = length of T; each character visited at most once |
 | **Space:** `O(1)`    | Only pointers and counters used, no extra string reconstruction       |
 
@@ -532,7 +542,7 @@ public class BackspaceStringCompare {
 `S = "ab#c"`, `T = "ad#c"`
 
 | i (S) | j (T) | Current S char | Current T char | Action                         |
-| ----- | ----- | -------------- | -------------- | ------------------------------ |
+|-------|-------|----------------|----------------|--------------------------------|
 | 3     | 3     | 'c'            | 'c'            | Compare → equal, move left     |
 | 2     | 2     | '#'            | '#'            | Count backspace, skip          |
 | 1     | 1     | 'b'            | 'd'            | Skip b and d due to backspaces |
@@ -552,7 +562,8 @@ public class BackspaceStringCompare {
 The **Expanding From Center** pattern is commonly used to **find palindromic substrings**.
 
 * A palindrome reads the same forward and backward.
-* The idea: consider **each character (or pair of characters) as a center** and **expand pointers outward** (left and right) as long as characters match.
+* The idea: consider **each character (or pair of characters) as a center** and **expand pointers outward** (left and
+  right) as long as characters match.
 * This efficiently checks for all palindromes **without generating all substrings explicitly**.
 
 Key idea: **Two pointers move in opposite directions from a center** to check symmetry.
@@ -629,7 +640,7 @@ public class LongestPalindrome {
 ### 5. ⏱️ Time & Space Complexity
 
 | Complexity        | Explanation                                                                 |
-| ----------------- | --------------------------------------------------------------------------- |
+|-------------------|-----------------------------------------------------------------------------|
 | **Time:** `O(n²)` | Each center expands at most n times, for n centers (including odd and even) |
 | **Space:** `O(1)` | Only pointers and substring indices used (excluding output)                 |
 
@@ -642,7 +653,7 @@ public class LongestPalindrome {
 **Step-by-step expansion:**
 
 | Center    | Left | Right | Palindrome Found     |
-| --------- | ---- | ----- | -------------------- |
+|-----------|------|-------|----------------------|
 | i=0 ('b') | 0    | 0     | "b"                  |
 | i=1 ('a') | 1    | 1     | "a" → expand → "bab" |
 | i=2 ('b') | 2    | 2     | "b" → expand → "aba" |
@@ -653,16 +664,14 @@ public class LongestPalindrome {
 
 ---
 
-
-
-
 # 🧠 Two Pointers — String Reversal
 
 ---
 
 ### 1. 🧩 Concept / Theory
 
-The **String Reversal** pattern uses **two pointers moving towards each other** to reverse a string (or a part of it) **in-place**.
+The **String Reversal** pattern uses **two pointers moving towards each other** to reverse a string (or a part of it) *
+*in-place**.
 
 * **One pointer starts at the beginning** of the string/array.
 * **The other pointer starts at the end**.
@@ -720,7 +729,7 @@ public class ReverseString {
     }
 
     public static void main(String[] args) {
-        char[] s = {'h','e','l','l','o'};
+        char[] s = {'h', 'e', 'l', 'l', 'o'};
         reverseCharArray(s);
 
         System.out.print("Reversed string: ");
@@ -734,7 +743,7 @@ public class ReverseString {
 ### 5. ⏱️ Time & Space Complexity
 
 | Complexity        | Explanation                            |
-| ----------------- | -------------------------------------- |
+|-------------------|----------------------------------------|
 | **Time:** `O(n)`  | Each character is visited/swapped once |
 | **Space:** `O(1)` | In-place reversal, no extra array used |
 
@@ -745,7 +754,7 @@ public class ReverseString {
 `s = ['h','e','l','l','o']`
 
 | Step | left | right | Array after swap      |
-| ---- | ---- | ----- | --------------------- |
+|------|------|-------|-----------------------|
 | 1    | 0    | 4     | ['o','e','l','l','h'] |
 | 2    | 1    | 3     | ['o','l','l','e','h'] |
 | 3    | 2    | 2     | Stop (pointers meet)  |
@@ -757,7 +766,7 @@ public class ReverseString {
 🎯 **Summary of the 7 Two Pointer Patterns**
 
 | Pattern                         | Key Idea                                                     |
-| ------------------------------- | ------------------------------------------------------------ |
+|---------------------------------|--------------------------------------------------------------|
 | Converging                      | Two pointers from opposite ends, e.g., target sum            |
 | Fast & Slow                     | Two speeds to detect cycles                                  |
 | Fixed Separation                | Two pointers separated by fixed distance, e.g., nth from end |
