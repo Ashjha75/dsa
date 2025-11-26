@@ -1,9 +1,12 @@
 # ⚡ Moore’s Voting Algorithm (Majority Element)
 
 ## 🔹 Use Case
-Use **Moore’s Voting Algorithm** to find the **majority element** (an element that appears more than ⌊n/2⌋ times) in an array.
+
+Use **Moore’s Voting Algorithm** to find the **majority element** (an element that appears more than ⌊n/2⌋ times) in an
+array.
 
 Think of it when:
+
 - You are asked for the **majority element** in an array.
 - The array is **not necessarily sorted**.
 - There is **guaranteed to be a majority element** (or you want to check if one exists).
@@ -11,6 +14,7 @@ Think of it when:
 ---
 
 ## 🔹 Intuition
+
 - Maintain a **candidate** and a **count**.
 - If count is 0, set current element as candidate.
 - If current element equals candidate, increment count.
@@ -19,6 +23,7 @@ Think of it when:
 ---
 
 ## 🔹 Java Code
+
 ```java
 class Main {
     static int majorityElement(int[] nums) {

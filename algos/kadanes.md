@@ -1,10 +1,12 @@
-
 # ⚡ Kadane’s Algorithm (Maximum Subarray Sum)
 
 ## 🔹 Use Case
-Use **Kadane’s Algorithm** when you need to find the **maximum sum of a contiguous subarray** in an array (like in problems about profits, temperature streaks, score trends, etc.).
+
+Use **Kadane’s Algorithm** when you need to find the **maximum sum of a contiguous subarray** in an array (like in
+problems about profits, temperature streaks, score trends, etc.).
 
 Think of it when:
+
 - You are asked for **"maximum sum of a subarray"**.
 - The array contains **positive and negative numbers**.
 - The subarray must be **continuous**.
@@ -12,17 +14,21 @@ Think of it when:
 ---
 
 ## 🔹 Intuition
+
 At each element, decide:
+
 - Continue the current subarray (add current element), **or**
 - Start a new subarray from the current element.
 
 We keep:
-- `currentSum`: max sum ending at current index  
-- `maxSum`: best sum found so far  
+
+- `currentSum`: max sum ending at current index
+- `maxSum`: best sum found so far
 
 ---
 
 ## 🔹 Java Code
+
 ```java
 class Main {
     static int kadane(int[] arr) {
