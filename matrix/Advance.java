@@ -1,6 +1,8 @@
 package matrix;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Compact matrix utilities for practice and interviews.
@@ -303,13 +305,13 @@ public class Advance {
      * <p><b>Time:</b> O(rc)  <b>Space:</b> O(1)</p>
      */
     public static int[] search(int[][] m, int target) {
-        if (m == null) return new int[] {-1, -1};
+        if (m == null) return new int[]{-1, -1};
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[i].length; j++) {
-                if (m[i][j] == target) return new int[] {i, j};
+                if (m[i][j] == target) return new int[]{i, j};
             }
         }
-        return new int[] {-1, -1};
+        return new int[]{-1, -1};
     }
 
     /**
@@ -398,7 +400,7 @@ public class Advance {
      *
      * <p><b>Time:</b> O(1) per query after O(rc) build  <b>Space:</b> O(rc)</p>
      *
-     * @throws IllegalArgumentException if {@code pref} is null
+     * @throws IllegalArgumentException       if {@code pref} is null
      * @throws ArrayIndexOutOfBoundsException if indices are out of range
      */
     public static int submatrixSum(int[][] pref, int r1, int c1, int r2, int c2) {
@@ -430,7 +432,7 @@ public class Advance {
      * @return {@code [row, col, value]} if found, else {@code {-1, -1, Integer.MIN_VALUE}}
      */
     public static int[] saddlePoint(int[][] m) {
-        if (m == null || m.length == 0) return new int[] {-1, -1, Integer.MIN_VALUE};
+        if (m == null || m.length == 0) return new int[]{-1, -1, Integer.MIN_VALUE};
         int r = m.length, c = m[0].length;
 
         for (int i = 0; i < r; i++) {
@@ -441,11 +443,14 @@ public class Advance {
             int candidate = m[i][minCol];
             boolean isSaddle = true;
             for (int k = 0; k < r; k++) {
-                if (m[k][minCol] > candidate) { isSaddle = false; break; }
+                if (m[k][minCol] > candidate) {
+                    isSaddle = false;
+                    break;
+                }
             }
-            if (isSaddle) return new int[] {i, minCol, candidate};
+            if (isSaddle) return new int[]{i, minCol, candidate};
         }
-        return new int[] {-1, -1, Integer.MIN_VALUE};
+        return new int[]{-1, -1, Integer.MIN_VALUE};
     }
 
     /**
