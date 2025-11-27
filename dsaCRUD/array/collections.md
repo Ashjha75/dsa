@@ -21,7 +21,7 @@ arr[0] arr[1] arr[2] arr[3] arr[4]
 ### Time Complexities
 
 | Operation       | Static Array | ArrayList      |
-| --------------- | ------------ | -------------- |
+|-----------------|--------------|----------------|
 | Access          | O(1)         | O(1)           |
 | Search          | O(n)         | O(n)           |
 | Insert (end)    | N/A          | O(1) amortized |
